@@ -18,6 +18,8 @@ description: 协助用户完成活动申请、奖项申报及荣誉申请。当�
 - Default branch: `master`
 - Repository visibility may be private; use the user's authenticated GitHub account/session when needed.
 
+在“活动申请”项目中，用户提到“真源库”或“产品真源库”时，均特指上述远端 GitHub 仓库。每次引用真源库事实都必须实时查询 `qschouteam/Aicare-Product-Kb`；本地缓存、历史摘要、生成材料、旧 clone 或 `materials/*/product-kb-notes.md` 只能作为定位线索，不能作为最终事实来源。若需要本地检索，只能在当前任务中先从远端新拉取或更新后再检索，并记录远端分支/commit 与来源路径。
+
 按事实类型分源：
 
 - 活动规则、评分标准、格式要求：只以活动方官方规则、模板、通知为准。
@@ -85,20 +87,21 @@ description: 协助用户完成活动申请、奖项申报及荣誉申请。当�
 
 ### 3. Locate Product/Solution in Product Knowledge Base
 
-当申请内容需要我方产品信息时，先定位申报对象，再检索 `qschouteam/Aicare-Product-Kb`，最后写作。该知识库可能是私有仓库：如果 GitHub connector、未登录浏览器、`curl` 或裸 API 返回 404，不要直接判定仓库不存在；改用用户已登录的 GitHub 浏览器会话或本地安装版。
+当申请内容需要我方产品信息时，先定位申报对象，再实时检索远端 `qschouteam/Aicare-Product-Kb`，最后写作。该知识库可能是私有仓库：如果 GitHub connector、未登录浏览器、`curl` 或裸 API 返回 404，不要直接判定仓库不存在；改用用户已登录的 GitHub 浏览器会话或用户授权的命令行通道。
 
 可用访问通道按优先级选择：
 
-1. 本地安装版：`~/.agent-skills/aicare-product-kb/`、`~/.codex/skills/aicare-product-kb/` 或用户提供的 clone 路径。
-2. 用户已登录的 GitHub 页面：`https://github.com/qschouteam/Aicare-Product-Kb`。
-3. 已授权的 GitHub connector/API。
+1. 用户已登录的 GitHub 页面：`https://github.com/qschouteam/Aicare-Product-Kb`。
+2. 已授权的 GitHub connector/API。
+3. 当前任务中新拉取或已执行 `git fetch/pull` 更新到远端最新状态的临时 clone。
 4. 用户导出的知识库文件或粘贴内容。
 
-如果发现本地安装版，优先用 `rg` 检索，并在可行时运行知识库自带 freshness 检查：
+如果使用临时 clone，必须先从远端新拉取或更新，并记录 commit，再用 `rg` 检索：
 
 ```bash
-cd ~/.agent-skills/aicare-product-kb && ./check-fresh.sh
-rg -n "关键词1|关键词2" ~/.agent-skills/aicare-product-kb
+git clone https://github.com/qschouteam/Aicare-Product-Kb /tmp/aicare-product-kb
+git -C /tmp/aicare-product-kb rev-parse HEAD
+rg -n "关键词1|关键词2" /tmp/aicare-product-kb
 ```
 
 推荐检索顺序：
