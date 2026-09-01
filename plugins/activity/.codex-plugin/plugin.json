@@ -1,0 +1,37 @@
+{
+  "name": "activity",
+  "version": "0.1.0",
+  "description": "Reusable Codex workflow for activity applications, award submissions, and honor applications.",
+  "author": {
+    "name": "yuanqing-xia",
+    "url": "https://github.com/yuanqing-xia"
+  },
+  "homepage": "https://github.com/yuanqing-xia/activity",
+  "repository": "https://github.com/yuanqing-xia/activity",
+  "keywords": [
+    "codex",
+    "skills",
+    "activity-application",
+    "award-submission",
+    "documents"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Activity Application",
+    "shortDescription": "Draft activity and award application materials with traceable sources.",
+    "longDescription": "A Codex workflow for analyzing activity rules, identifying application subjects, retrieving Aicare product facts from the source knowledge base, aligning case evidence, and drafting or filling submission documents.",
+    "developerName": "yuanqing-xia",
+    "category": "Productivity",
+    "capabilities": [
+      "Workflow",
+      "Write",
+      "Documents"
+    ],
+    "defaultPrompt": [
+      "$activity:activity-skill 帮我分析这个活动规则并列出申报材料清单。",
+      "$activity:activity-skill 根据这些案例资料起草奖项申报书。",
+      "$activity:activity-skill 帮我填充这个官方 Word 模板。"
+    ],
+    "brandColor": "#2563EB"
+  }
+}
