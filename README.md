@@ -1,17 +1,50 @@
 # activity
 
-活动申请资料仓库。
+活动申请资料仓库，也可作为活动申请工作流的可分发 Skill/插件源。
+
+把这个仓库地址发给使用者即可：
+
+```text
+https://github.com/yuanqing-xia/activity
+```
+
+使用者可按自己的环境选择“独立 Skill 安装”或“Codex 插件安装”。独立 Skill 更通用，插件安装更适合需要 Codex 插件管理页面的场景。
 
 ## 目录约定
 
 - `rules/`: 活动规则、申报通知、官方模板。
 - `materials/`: 案例素材、证明材料、参考资料。
 - `outputs/`: 生成或整理后的申请文档、提交稿。
-- `skills/activity-skill/`: 活动申请配套 Codex Skill。
+- `skills/activity-skill/`: 活动申请 Skill，可独立安装。
 - `.agents/plugins/marketplace.json`: Codex 插件 marketplace 清单。
 - `plugins/activity/`: 可分发的 Codex 插件包，内置 `activity-skill`。
 
-## Codex 插件分发
+## 独立 Skill 安装
+
+适合只想使用这个工作流、不需要插件管理能力的场景。
+
+在 Codex 中可以直接发：
+
+```text
+请使用 $skill-installer 从 GitHub 安装这个 Skill：
+https://github.com/yuanqing-xia/activity/tree/main/skills/activity-skill
+```
+
+安装后可以显式调用：
+
+```text
+$activity-skill 帮我分析这个活动规则并列出申报材料清单。
+```
+
+也可以手动安装：
+
+```bash
+git clone https://github.com/yuanqing-xia/activity.git
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+cp -R activity/skills/activity-skill "${CODEX_HOME:-$HOME/.codex}/skills/activity-skill"
+```
+
+## Codex 插件安装
 
 本仓库已整理为 Codex marketplace 源。其他人获得 GitHub 只读权限后，可以添加本仓库并安装插件：
 
@@ -25,6 +58,10 @@ codex plugin add activity@activity
 ```text
 $activity:activity-skill 帮我分析这个活动规则并列出申报材料清单。
 ```
+
+## 其它平台迁移
+
+如果平台不支持 Codex Skill 或 Codex 插件，仍可把 `skills/activity-skill/SKILL.md` 作为通用代理指令使用，并按需复制 `skills/activity-skill/scripts/` 中的辅助脚本。迁移时保留“真源库实时查询、事实来源分层、不得编造成效数据、优先官方模板”的约束。
 
 ## 权限边界
 

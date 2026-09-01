@@ -1,0 +1,7 @@
+interface:
+  display_name: "Activity Application"
+  short_description: "Draft activity and award submissions."
+  brand_color: "#2563EB"
+  default_prompt: "Use $activity-skill to analyze activity rules and draft traceable submission materials."
+policy:
+  allow_implicit_invocation: true
